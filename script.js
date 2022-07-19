@@ -52,9 +52,9 @@ function game() {
   }
 
   if (playerScore === 3) {
-    console.log("Congratulations! You win");
+    alert("Congratulations! You win");
   } else {
-    console.log("You straight up suck at rock paper scissors, pal");
+    alert("You straight up suck at rock paper scissors, pal");
   }
 }
 
