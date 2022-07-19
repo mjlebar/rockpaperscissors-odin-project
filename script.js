@@ -18,19 +18,44 @@ function playRound(playerSelection, computerSelection) {
     computerSelection.toLowerCase().slice(1); //standardizes capitalization so input can be in any capitalization
 
   if (pS === cS) {
-    return `It's a tie! You both threw ${cS}`;
+    return [`It's a tie! You both threw ${cS}`, 0]; //Second item in array is a convenient way to record whether the round is a tie, player win, or computer win
   } else if (
     (pS === "Rock" && cS === "Scissors") ||
     (pS === "Scissors" && cS === "Paper") ||
     (pS === "Paper" && cS === "Rock")
   ) {
-    return `You win! ${pS} beats ${cS}`;
+    return [`You win! ${pS} beats ${cS}`, 1];
   } else if (
-    (cS === "Sc" && pS === "Scissors") ||
+    (cS === "Rock" && pS === "Scissors") ||
     (cS === "Scissors" && pS === "Paper") ||
     (cS === "Paper" && pS === "Rock")
   ) {
-    return `You win! ${cS} beats ${pS}`;
+    return [`You Lose! ${cS} beats ${pS}`, 2];
   }
 }
-console.log(playRound("rock", "PAPER"));
+// console.log(playRound("rock", "PAPER"));
+
+//Plays best of 5, not including ties
+
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  while (playerScore < 3 && computerScore < 3) {
+    const playerSelection = prompt("Rock, Paper, or Scissors?");
+    const results = playRound(playerSelection, getComputerChoice());
+    alert(results[0]);
+    if (results[1] === 1) {
+      playerScore++;
+    } else if (results[1] === 2) {
+      computerScore++;
+    }
+  }
+
+  if (playerScore === 3) {
+    console.log("Congratulations! You win");
+  } else {
+    console.log("You straight up suck at rock paper scissors, pal");
+  }
+}
+
+game();
