@@ -31,8 +31,17 @@ gameButtons.forEach((button) => {
 reset.addEventListener("click", function () {
   winner.classList.add("hidden");
   reset.classList.add("hidden");
+  playerScore = 0;
+  computerScore = 0;
   yourScore.textContent = "You:";
   compScore.textContent = "Computer:";
+  gameButtons.forEach((button) => {
+    button.addEventListener(
+      "click",
+      // () => console.log(button.textContent)
+      playRound
+    );
+  });
 });
 
 //plays a single round
@@ -66,11 +75,17 @@ function playRound() {
     winner.classList.toggle("hidden");
     winner.textContent = "Congratulations! You won";
     setTimeout(() => reset.classList.toggle("hidden"), 1500);
+    gameButtons.forEach((button) =>
+      button.removeEventListener("click", playRound)
+    );
   } else if (computerScore >= 5) {
     winner.style.color = "red";
     winner.classList.toggle("hidden");
     winner.textContent = "Sorry! You straight up suck";
     setTimeout(() => reset.classList.toggle("hidden"), 1500);
+    gameButtons.forEach((button) =>
+      button.removeEventListener("click", playRound)
+    );
   }
 }
 
