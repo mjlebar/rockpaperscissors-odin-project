@@ -10,7 +10,7 @@ body {
   padding: 25px;
 }
 
-.buttons button {
+button {
   background-color: aliceblue;
   font-weight: 700;
   padding: 8px;
@@ -36,6 +36,7 @@ body {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;
   background-color: gray;
+  padding-bottom: 36px;
 }
 
 .score-container,
@@ -63,6 +64,7 @@ body {
 }
 
 .score-pointer {
+  padding-block: 10px;
   border-bottom: 5px solid white;
   font-size: large;
   padding-inline: 125px;
@@ -72,4 +74,20 @@ body {
 .message {
   font-size: larger;
   font-weight: 700;
+}
+
+.winner {
+  font-size: x-large;
+  color: goldenrod;
+  font-weight: 1000;
+  border-color: goldenrod;
+  border-radius: 5px;
+  border-width: 3px;
+  border-style: inset;
+  background-color: rgb(46, 46, 46);
+  padding: 15px;
+}
+
+.hidden {
+  display: none;
 }

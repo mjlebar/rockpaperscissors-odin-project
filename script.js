@@ -1,10 +1,17 @@
 "use strict";
 
 const message = document.querySelector(".message");
+const winner = document.querySelector(".winner");
+const reset = document.querySelector(".reset");
+const yourScore = document.querySelector(".score-you");
+const compScore = document.querySelector(".score-comp");
 
-const buttons = document.querySelectorAll("button");
+const gameButtons = document.querySelectorAll(".btn-game");
 
 const options = ["Rock", "Paper", "Scissors"]; //Array of possible moves in game
+
+let playerScore = 0;
+let computerScore = 0;
 
 //Returns computer's choice of rock, paper, or scissors
 function getComputerChoice() {
@@ -13,12 +20,19 @@ function getComputerChoice() {
 
 // console.log(getComputerChoice());
 
-buttons.forEach((button) => {
+gameButtons.forEach((button) => {
   button.addEventListener(
     "click",
     // () => console.log(button.textContent)
     playRound
   );
+});
+
+reset.addEventListener("click", function () {
+  winner.classList.add("hidden");
+  reset.classList.add("hidden");
+  yourScore.textContent = "You:";
+  compScore.textContent = "Computer:";
 });
 
 //plays a single round
@@ -35,21 +49,37 @@ function playRound() {
     (pS === "Paper" && cS === "Rock")
   ) {
     message.textContent = `You win! ${pS} beats ${cS}`;
+    playerScore++;
+    yourScore.textContent = `You: ${playerScore}`;
   } else if (
     (cS === "Rock" && pS === "Scissors") ||
     (cS === "Scissors" && pS === "Paper") ||
     (cS === "Paper" && pS === "Rock")
   ) {
     message.textContent = `You lose! ${cS} beats ${pS}`;
+    computerScore++;
+    compScore.textContent = `Computer: ${computerScore}`;
+  }
+
+  setTimeout(() => (message.textContent = ""), 2500);
+  if (playerScore >= 5) {
+    winner.classList.toggle("hidden");
+    winner.textContent = "Congratulations! You won";
+    setTimeout(() => reset.classList.toggle("hidden"), 1500);
+  } else if (computerScore >= 5) {
+    winner.style.color = "red";
+    winner.classList.toggle("hidden");
+    winner.textContent = "Sorry! You straight up suck";
+    setTimeout(() => reset.classList.toggle("hidden"), 1500);
   }
 }
+
 // console.log(playRound("rock", "PAPER"));
 
 //Plays best of 5, not including ties
 
 // function game() {
-//   let playerScore = 0;
-//   let computerScore = 0;
+//
 //   while (playerScore < 3 && computerScore < 3) {
 //     const playerSelection = prompt("Rock, Paper, or Scissors?");
 //     const results = playRound(playerSelection, getComputerChoice());
